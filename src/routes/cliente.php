@@ -1,12 +1,24 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use Nette\Mail\Message;
 
 $app = new \Slim\App();
 
 
-// Get todos os clientes
-$app->get('/api/customers', function(Request $request, Response $response){
+$app->options('/{routes:.+}', function ($request, $response, $args) {
+    return $response;
+});
+$app->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+            ->withHeader('Access-Control-Allow-Origin', '#')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// Get clientes
+$app->get('/api/cliente', function(Request $request, Response $response){
    $sql = "SELECT * FROM cliente";
    
    try{
@@ -30,7 +42,7 @@ $app->get('/api/customers', function(Request $request, Response $response){
 
 
  // Get cliente específico
-  $app->get('/api/customers/{id}', function(Request $request, Response $response){
+  $app->get('/api/cliente/{id}', function(Request $request, Response $response){
       $id = $request->getAttribute('id');
       $sql = "SELECT * FROM cliente WHERE id = $id";
    
@@ -51,8 +63,7 @@ $app->get('/api/customers', function(Request $request, Response $response){
 });
 
 // Adicionar cliente
-
-$app->get('/api/customers/add', function(Request $request, Response $response){
+ $app->get('/api/cliente/add', function(Request $request, Response $response){
     
     $cpf =         $request->getParam('cpf');
     $senha =       $request->getParam('senha');
@@ -113,7 +124,17 @@ $app->get('/api/customers/add', function(Request $request, Response $response){
         $stmt->bindParam(':renda_bruta',     $renda_bruta);
         
         $stmt->execute();
-        echo '{"notice": {"text": "Customer Added"}';
+        
+        $mail = new Message;
+        $mail->setFrom('empresa <empresa@example.com>')
+        	 ->addTo($email)
+        	 ->setSubject('Confirmação de Cadastro')
+        	 ->setBody("Olá, Cadastro em PHP API realizado com sucesso");
+        	
+        	$mailer = new SendmailMailer;
+            $mailer->send($mail);
+        	
+        echo '{"notice": {"text": "Cliente Adicionado"}';
         
     } catch(PDOException $e){
         echo '{"error": {"text": '.$e->getMessage().'}';
@@ -121,22 +142,5 @@ $app->get('/api/customers/add', function(Request $request, Response $response){
 });
 
 
-// Delete Cliente
-$app->delete('/api/customers/delete/{id}', function(Request $request, Response $response){
-    $id = $request->getAttribute('id');
-    $sql = "DELETE FROM cliente WHERE id = $id";
-    try{
-        // Get DB Object
-        $db = new db();
-        // Connect
-        $db = $db->connect();
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $db = null;
-        echo '{"notice": {"text": "Customer Deleted"}';
-    } catch(PDOException $e){
-        echo '{"error": {"text": '.$e->getMessage().'}';
-    }
-});
 
   
