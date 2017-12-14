@@ -14,9 +14,9 @@ $ cd my-project
 $ npm install
 $ npm run dev
 
-# Instalação View Router:
+- Instalação View Router:
 $ npm install vue-router vue-resource --save
 $ npm run dev
 
-# Envio de Emails - Instalação via Composer: (Utilização biblioteca  “Nette Mail” https://github.com/nette/mail)
+-Envio de Emails - Instalação via Composer: (Utilização biblioteca  “Nette Mail” https://github.com/nette/mail)
 $composer require nette/mail
