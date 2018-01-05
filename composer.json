@@ -1,6 +1,6 @@
 {
     "require": {
         "slim/slim": "^3.0",
-        "nette/mail": "^2.3"
+        "nette/mail": "^2.4"
     }
 }

@@ -1,18 +1,18 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use Nette\Mail\Message;
+
 
 $app = new \Slim\App();
-
 
 $app->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
 });
+
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
-            ->withHeader('Access-Control-Allow-Origin', '#')
+            ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
@@ -23,15 +23,15 @@ $app->get('/api/cliente', function(Request $request, Response $response){
    
    try{
      //GET database Object
-     $db = new db();
-     
+     $db = new db();     
+    
      //Connect
      $db = $db -> connect();
      
      $stmt = $db -> query($sql);
-     $customers = $stmt -> fetchAll(PDO::FETCH_OBJ);
+     $clientes = $stmt -> fetchAll(PDO::FETCH_OBJ);
      $db = null;
-     echo json_encode($customers);
+     echo json_encode($clientes);
      
      
    }catch(PDOExceotion $e){
@@ -39,32 +39,11 @@ $app->get('/api/cliente', function(Request $request, Response $response){
    }
 });
 
-
-
- // Get cliente específico
-  $app->get('/api/cliente/{id}', function(Request $request, Response $response){
-      $id = $request->getAttribute('id');
-      $sql = "SELECT * FROM cliente WHERE id = $id";
-   
-      try{
-          
-           // Get DB Object
-           $db = new db();
-           
-           // Connect
-           $db = $db->connect();
-           $stmt = $db->query($sql);
-           $customer = $stmt->fetch(PDO::FETCH_OBJ);
-           $db = null;
-           echo json_encode($customer);
-       } catch(PDOException $e){
-           echo '{"error": {"text": '.$e->getMessage().'}';
-       }
-});
-
 // Adicionar cliente
- $app->get('/api/cliente/add', function(Request $request, Response $response){
-    
+
+ $app->post('/api/cliente/add', function(Request $request, Response $response){
+
+
     $cpf =         $request->getParam('cpf');
     $senha =       $request->getParam('senha');
     $nome =        $request->getParam('nome');
@@ -90,7 +69,7 @@ $app->get('/api/cliente', function(Request $request, Response $response){
     $renda_bruta =      $request->getParam('renda_bruta');
     
     
-    $sql = "INSERT INTO cliente (cpf,senha,nome,telefone,email,nascimento,cep,logradouro,num,complemento,bairro,cidade,estado,rg,expedicao,orgao_expeditor,estado_civil,categoria,empresa,profissao,renda_bruta) VALUES
+    $sql = " INSERT INTO cliente(cpf,senha,nome,telefone,email,nascimento,cep,logradouro,num,complemento,bairro,cidade,estado,rg,expedicao,orgao_expeditor,estado_civil,categoria,empresa,profissao,renda_bruta) VALUES
     (:cpf,:senha,:nome,:telefone,:email,:nascimento,:cep,:logradouro,:num,:complemento,:bairro,:cidade,:estado,:rg,:expedicao,:orgao_expeditor,:estado_civil,:categoria,:empresa,:profissao,:renda_bruta)";
     try{
         // Get DB Object
@@ -108,7 +87,7 @@ $app->get('/api/cliente', function(Request $request, Response $response){
         
         $stmt->bindParam(':cep',         $cep);
         $stmt->bindParam(':logradouro',  $logradouro);
-        $stmt->bindParam(':nume',        $num);
+        $stmt->bindParam(':num',        $num);
         $stmt->bindParam(':complemento', $complemento);
         $stmt->bindParam(':bairro',      $bairro);
         $stmt->bindParam(':cidade',      $cidade);
@@ -122,18 +101,9 @@ $app->get('/api/cliente', function(Request $request, Response $response){
         $stmt->bindParam(':empresa',         $empresa);
         $stmt->bindParam(':profissao',       $profissao);
         $stmt->bindParam(':renda_bruta',     $renda_bruta);
-        
         $stmt->execute();
         
-        $mail = new Message;
-        $mail->setFrom('empresa <empresa@example.com>')
-        	 ->addTo($email)
-        	 ->setSubject('Confirmação de Cadastro')
-        	 ->setBody("Olá, Cadastro em PHP API realizado com sucesso");
-        	
-        	$mailer = new SendmailMailer;
-            $mailer->send($mail);
-        	
+            
         echo '{"notice": {"text": "Cliente Adicionado"}';
         
     } catch(PDOException $e){
@@ -142,5 +112,4 @@ $app->get('/api/cliente', function(Request $request, Response $response){
 });
 
 
-
-  
+ 

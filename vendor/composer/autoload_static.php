@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite52f90a0e93efe7a6886c794e733e39b
+class ComposerStaticInita8c3e53d8bc77803aa74e8d39f1c9b8d
 {
     public static $files = array (
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
@@ -77,6 +77,8 @@ class ComposerStaticInite52f90a0e93efe7a6886c794e733e39b
         'Nette\\Iterators\\Mapper' => __DIR__ . '/..' . '/nette/utils/src/Iterators/Mapper.php',
         'Nette\\Iterators\\RecursiveFilter' => __DIR__ . '/..' . '/nette/utils/src/Iterators/RecursiveFilter.php',
         'Nette\\Localization\\ITranslator' => __DIR__ . '/..' . '/nette/utils/src/Utils/ITranslator.php',
+        'Nette\\Mail\\FallbackMailer' => __DIR__ . '/..' . '/nette/mail/src/Mail/FallbackMailer.php',
+        'Nette\\Mail\\FallbackMailerException' => __DIR__ . '/..' . '/nette/mail/src/Mail/exceptions.php',
         'Nette\\Mail\\IMailer' => __DIR__ . '/..' . '/nette/mail/src/Mail/IMailer.php',
         'Nette\\Mail\\Message' => __DIR__ . '/..' . '/nette/mail/src/Mail/Message.php',
         'Nette\\Mail\\MimePart' => __DIR__ . '/..' . '/nette/mail/src/Mail/MimePart.php',
@@ -89,6 +91,8 @@ class ComposerStaticInite52f90a0e93efe7a6886c794e733e39b
         'Nette\\NotSupportedException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Object' => __DIR__ . '/..' . '/nette/utils/src/Utils/Object.php',
         'Nette\\OutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\SmartObject' => __DIR__ . '/..' . '/nette/utils/src/Utils/SmartObject.php',
+        'Nette\\StaticClass' => __DIR__ . '/..' . '/nette/utils/src/Utils/StaticClass.php',
         'Nette\\StaticClassException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\UnexpectedValueException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\ArrayHash' => __DIR__ . '/..' . '/nette/utils/src/Utils/ArrayHash.php',
@@ -107,6 +111,7 @@ class ComposerStaticInite52f90a0e93efe7a6886c794e733e39b
         'Nette\\Utils\\ObjectMixin' => __DIR__ . '/..' . '/nette/utils/src/Utils/ObjectMixin.php',
         'Nette\\Utils\\Paginator' => __DIR__ . '/..' . '/nette/utils/src/Utils/Paginator.php',
         'Nette\\Utils\\Random' => __DIR__ . '/..' . '/nette/utils/src/Utils/Random.php',
+        'Nette\\Utils\\Reflection' => __DIR__ . '/..' . '/nette/utils/src/Utils/Reflection.php',
         'Nette\\Utils\\RegexpException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Strings' => __DIR__ . '/..' . '/nette/utils/src/Utils/Strings.php',
         'Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
@@ -116,10 +121,10 @@ class ComposerStaticInite52f90a0e93efe7a6886c794e733e39b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite52f90a0e93efe7a6886c794e733e39b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite52f90a0e93efe7a6886c794e733e39b::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInite52f90a0e93efe7a6886c794e733e39b::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInite52f90a0e93efe7a6886c794e733e39b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita8c3e53d8bc77803aa74e8d39f1c9b8d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita8c3e53d8bc77803aa74e8d39f1c9b8d::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInita8c3e53d8bc77803aa74e8d39f1c9b8d::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInita8c3e53d8bc77803aa74e8d39f1c9b8d::$classMap;
 
         }, null, ClassLoader::class);
     }
