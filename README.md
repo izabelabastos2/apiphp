@@ -1,22 +1,17 @@
-# php-api
-API de cadastro usando RESTful PHP e MySQL. Utilização do Vue.js e bootstap para front. Código desenvolvido em Cloud9
+Para rodar a aplicação apiphp:
 
-# Dependências:
-Composer
+-instalar o xampp
+-instalar o composer
+-instalar o slimphp
 
-# Instalação Slim PHP:
-$ composer require slim/slim "^3.0"
+colar a pasta do projeto em c:\xampp\htdocs\
+no xampp-control, inicializar o apache e o mySQL
 
-# Instalação Vue.js:
-$ npm install --global vue-cli
-$ vue init webpack my-project
-$ cd my-project
-$ npm install
-$ npm run dev
+--instalar o aplicativo restEasy no google chrome, para teste da api simples backend
+-- no campo URL digitar: http://localhost/apiphp/public/index.php/api/cliente/add
+-- Em "Headers" name: Content-Type Value: application/json
+-- Em "Body" inserir os dados dos clientes a serem salvos no Banco de Dados, no padrão json {"campo" : "key" , "campo2": "key2"}
 
-- Instalação View Router:
-$ npm install vue-router vue-resource --save
-$ npm run dev
+arquivo com tabela do BD na pasta _sql
+Fotos do programa rodando na pasta img
 
--Envio de Emails - Instalação via Composer: (Utilização biblioteca  “Nette Mail” https://github.com/nette/mail)
-$composer require nette/mail
