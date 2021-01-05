@@ -1,4 +1,4 @@
-Para rodar a aplicação apiphp:
+To run the application apiphp:
 
 -- install xampp
 -- install composer
